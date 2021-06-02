@@ -5,9 +5,28 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: peachpuff;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#search {
+  text-align: center;
+  font-size: 2vw;
+}
+
+#searchBar {
+  border-radius: 20px;
+  font-size: 100%;
+  padding: 12px;
+  background: rgba(0,0,0,0); /* transparent background */
+}
+/* when clicked on */
+#searchBar:focus {
+  border: 3px solid black;
+  outline: none;  /* remove border when cursor clicks on field */
 }
