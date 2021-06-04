@@ -32,17 +32,16 @@ function SearchBar() {
 function MovieList() {
   return (
     <div className="movieList">
-      <MovieCard/>
-      <MovieCard/>
-
+      <MovieCard name="Movie"releaseDate="6/2/21" runtime="1 hr" genre="family" director="director"/>
+      <MovieCard name="Movie" releaseDate="6/2/21" runtime="1 hr" genre="family" director="director"/>
     </div>
   );
 }
 
-function MovieCard() {
+function MovieCard({name, releaseDate, runtime, genre, director}) {
   return (
     <div >
-      <Card  style={{backgroundColor: 'transparent', margin: "25px", borderRadius: "20px"}}>
+      <Card  style={{backgroundColor: 'transparent', margin: "20px", borderRadius: "20px"}}>
         <CardActionArea >
           <Grid container
             className="cardGridContainer"
@@ -50,16 +49,18 @@ function MovieCard() {
             justify = "center"
             spacing = {2} >
 
-            <Grid item className="movieTitle">Movie Name</Grid>
+          {/*movie title*/}
+            <Grid item style={{paddingTop: "25px", marginBottom: "20px"}} className="movieTitle">{name}</Grid>
 
+          {/* horizontal row of movie details */}
             <Grid container
               direction='row'
               justify = "center"
               spacing = {10}>
-              <Grid item>release data</Grid>
-              <Grid item>runtime</Grid>
-              <Grid item>genre</Grid>
-              <Grid item>director</Grid>
+              <Grid item>{releaseDate}</Grid>
+              <Grid item>{runtime}</Grid>
+              <Grid item>{genre}</Grid>
+              <Grid item>{director}</Grid>
             </Grid>
 
           </Grid>
