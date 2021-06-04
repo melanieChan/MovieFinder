@@ -52,7 +52,7 @@ function MovieList() {
            <div className="movieList">
              {movies.Search.map(movie => {
                 return <MovieCard name={ movie.Title}
-                              releaseDate={movie.Year} runtime="1 hr" genre="family" director="director"/>
+                              releaseDate={movie.Year} />
               })}
            </div>
          );
@@ -66,7 +66,29 @@ function MovieList() {
 }
 
 // card showing details of a specific movie
-function MovieCard({name, releaseDate, runtime, genre, director}) {
+function MovieCard({name, releaseDate}) {
+  const [movieData, setMovieData] = useState(null);
+
+  var runtime = "Unknown duration";
+  var genre = "Unknown genre";
+  var director = "Unknown director";
+
+  // find details of movie
+  useEffect(()=> {
+      fetch(`http://www.omdbapi.com/?t=${name}&apikey=52514a3a`)
+        .then(response => response.json())
+        .then(setMovieData)
+        .catch(console.error);
+  }, []);
+
+  // set movie data variables to results retrieved
+  if (movieData && movieData.Response === "True") {
+    runtime = `${movieData.Runtime}`;
+    genre = `${movieData.Genre}`;
+    if (movieData.Director !== null && movieData.Director !== "N/A")
+      director = `${movieData.Director}`;
+  }
+
   return (
     <div >
       <Card  style={{backgroundColor: 'transparent', margin: "20px", borderRadius: "20px"}}>
@@ -82,9 +104,10 @@ function MovieCard({name, releaseDate, runtime, genre, director}) {
 
           {/* horizontal row of movie details */}
             <Grid container
+              className = "cardDetailsContainer"
               direction='row'
               justify = "center"
-              spacing = {10}>
+              spacing = {7}>
               <Grid item>{releaseDate}</Grid>
               <Grid item>{runtime}</Grid>
               <Grid item>{genre}</Grid>

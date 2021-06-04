@@ -82,3 +82,8 @@ code {
   font-size: 1.85vw;
   background: #ffdabf;
 }
+
+/* container for movie details on movie card */
+.cardDetailsContainer {
+  padding: 25px;
+}
