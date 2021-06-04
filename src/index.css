@@ -12,6 +12,7 @@ body {
   /*background: papayawhip; */
   background-image: linear-gradient(peachpuff, papayawhip);
   background-repeat: no-repeat;
+  background-attachment: fixed; /* locks background to not move as user scolls down*/
 }
 
 code {
@@ -26,16 +27,17 @@ code {
 /* list of cards for movies*/
 .movieList {
   background-size: cover;
-  height: 100%;
   padding: 50px;
   spacing: 20px;
 }
 
+/* contains search bar and submit button*/
 #search {
   text-align: center;
   font-size: 2vw;
 }
 
+/* where user types in search query */
 #searchBar {
   border-radius: 20px;
   font-size: 100%;
@@ -48,6 +50,7 @@ code {
   outline: none;  /* remove border when cursor clicks on field */
 }
 
+/* button that submits search query */
 .searchBtn {
   background-color: lightsalmon;
   color: black;
@@ -57,8 +60,7 @@ code {
   padding: 12px;
   font-size: 100%;
   border-radius: 20px;
-}
-.searchBtn:hover {
+} .searchBtn:hover {
   cursor: pointer;
   color: lightsalmon;
   background-color: black;
@@ -73,6 +75,7 @@ code {
   background-color: rgba(255, 255, 255, 0.45);
 }
 
+/* movie title on movie card */
 .movieTitle {
   color: salmon;
   font-weight: bold;
