@@ -35,18 +35,18 @@ function SearchBar() {
 function MovieList() {
   const [movies, setMovies] = useState(null);
 
-    const movieTitle = "moana";
+    const movieTitle = "aladdin";
 
     // search movies
     useEffect(()=> {
         fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a`)
-          .then(res => res.json())
+          .then(response => response.json())
           .then(setMovies)
           .catch(console.error);
     }, []);
 
     // display search results
-    if (movies) {
+    if (movies && movies.Response === "True") {
       // display a card for every movie in search results list
       return (
            <div className="movieList">
