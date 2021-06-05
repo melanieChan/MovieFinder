@@ -73,13 +73,20 @@ function MovieCard({name, releaseDate}) {
   var genre = "Unknown genre";
   var director = "Unknown director";
 
+  const [detailsShown, setDetailsShown] = useState(false);  // whether or not details are currently displayed
+
   // find details of movie
-  useEffect(()=> {
+  async function getDetails() {
+    // will only get data if data isn't already displayed
+    if (!detailsShown) {
+      console.log("getting movie data");
       fetch(`http://www.omdbapi.com/?t=${name}&apikey=52514a3a`)
         .then(response => response.json())
         .then(setMovieData)
         .catch(console.error);
-  }, []);
+      setDetailsShown(true);
+    }
+  }
 
   // set movie data variables to results retrieved
   if (movieData && movieData.Response === "True") {
@@ -92,7 +99,11 @@ function MovieCard({name, releaseDate}) {
   return (
     <div >
       <Card  style={{backgroundColor: 'transparent', margin: "20px", borderRadius: "20px"}}>
-        <CardActionArea >
+        <CardActionArea onClick ={() => {
+          console.log("clicked on movie to see details");
+          console.log("detailsShown: " + detailsShown);
+          getDetails();
+        }}>
           <Grid container
             className="cardGridContainer"
             direction = "column"
