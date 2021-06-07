@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="app">
       <SearchBar />
-      <MovieList />
+      <MovieList movieTitle="aladdin"/>
     </div>
   );
 }
@@ -36,10 +36,8 @@ function SearchBar() {
 }
 
 // list of movies from search results
-function MovieList() {
+function MovieList({movieTitle}) {
   const [movies, setMovies] = useState(null);
-
-    const movieTitle = "aladdin";
 
     // search movies
     useEffect(()=> {
