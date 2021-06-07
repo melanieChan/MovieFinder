@@ -20,17 +20,26 @@ function App() {
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState(''); // user search bar input
 
+  // called after user clicks search button to submit search query  
+  function search(e) {
+    e.preventDefault();   // prevent page from refreshing
+
+    setSearchQuery(""); // clear search bar
+  }
+
   return (
     <div id="search">
       <h1>Movies</h1>
-      <input
-        id="searchBar"
-        type="text"
-        placeholder="Search Movies"
-        value = {searchQuery} // store search query
-        onChange = {e => setSearchQuery(e.target.value)}  // set search bar value to display search query
-      />
-      <button className="searchBtn">Find Movie</button>
+      <form onSubmit={search}>
+        <input
+          id="searchBar"
+          type="text"
+          placeholder="Search Movies"
+          value = {searchQuery} // store search query
+          onChange = {e => setSearchQuery(e.target.value)}  // set search bar value to display search query
+        />
+        <button className="searchBtn">Find Movie</button>
+      </form>
     </div>
     );
 }
