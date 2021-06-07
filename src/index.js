@@ -18,6 +18,8 @@ function App() {
 }
 
 function SearchBar() {
+  const [searchQuery, setSearchQuery] = useState(''); // user search bar input
+
   return (
     <div id="search">
       <h1>Movies</h1>
@@ -25,6 +27,8 @@ function SearchBar() {
         id="searchBar"
         type="text"
         placeholder="Search Movies"
+        value = {searchQuery} // store search query
+        onChange = {e => setSearchQuery(e.target.value)}  // set search bar value to display search query
       />
       <button className="searchBtn">Find Movie</button>
     </div>
