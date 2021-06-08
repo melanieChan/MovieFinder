@@ -56,6 +56,12 @@ function MovieList({movieTitle, searchState}) {
   const [movies, setMovies] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    // reset current page count to 1 if a new movie is searched
+    if (currentPage !== 1)
+      setCurrentPage(1);
+  }, [searchState]);
+
     // search movies
     useEffect(()=> {
       console.log("getting search data for " + movieTitle + " page " + currentPage);
