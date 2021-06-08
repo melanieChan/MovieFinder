@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {useState} from "react";
-import {useEffect} from "react";
+import {useState, useEffect} from "react";
 
 import Grid from "@material-ui/core/Grid"
 import Card from "@material-ui/core/Card";
@@ -11,12 +10,12 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 function App() {
   return (
     <div className="app">
-      <SearchBar />
+      <MovieSearch />
     </div>
   );
 }
 
-function SearchBar() {
+function MovieSearch() {
   const [searchQuery, setSearchQuery] = useState(''); // user search bar input
   const [searchParameter, setSearchParameter] = useState(''); // search query formatted
 
@@ -44,8 +43,9 @@ function SearchBar() {
       </form>
 
       {/* display list of searched movies
-        [condition] ? [result if true] : [result if false]*/}
-      {searchParameter ? <MovieList movieTitle={searchParameter} searchState={searchParameter} /> : <></>}
+        [condition] ? [result if true] : [result if false]*/
+        searchParameter ? <MovieList movieTitle={searchParameter} searchState={searchParameter} /> : <></>
+      }
 
     </div>
     );
