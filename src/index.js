@@ -54,28 +54,40 @@ function SearchBar() {
 // list of movies from search results
 function MovieList({movieTitle, searchState}) {
   const [movies, setMovies] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
     // search movies
     useEffect(()=> {
-      console.log("getting search data for " + movieTitle);
+      console.log("getting search data for " + movieTitle + " page " + currentPage);
 
-        fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a`)
+        fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a&page=${currentPage}`)
           .then(response => response.json())
-          .then(setMovies)
+          .then(response => setMovies(response))
           .catch(console.error);
-    }, [searchState]); // useEffect will run when search state changes
+    }, [searchState, currentPage]); // useEffect will run when search state or page changes due to user search input changes or page navigation
+
+    // called when user clicks on button to go to different page
+    function changePage(page) {
+      if (page !== currentPage)
+        setCurrentPage(page);
+    }
 
     // display search results
     if (movies && movies.Response === "True") {
-      console.log("displaying movies for " + movieTitle);
+      console.log("displaying movies for " + movieTitle + " page " + currentPage);
 
-      // display a card for every movie in search results list
       return (
            <div className="movieList">
-             {movies.Search.map(movie => {
-                return <MovieCard name={ movie.Title}
-                              releaseDate={movie.Year} />
+              {/* display a card for every movie in search results list */
+               movies.Search.map(movie => {
+                  return <MovieCard name={ movie.Title}
+                                releaseDate={movie.Year} />
               })}
+
+              { /* page navigation */
+                [1,2,3].map((page) => (
+                    <button onClick={() => {changePage(page)} }>{page}</button>
+                  ))}
            </div>
          );
     }
