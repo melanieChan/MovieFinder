@@ -12,19 +12,21 @@ function App() {
   return (
     <div className="app">
       <SearchBar />
-      <MovieList movieTitle="aladdin"/>
     </div>
   );
 }
 
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState(''); // user search bar input
+  const [searchParameter, setSearchParameter] = useState(''); // search query formatted
 
-  // called after user clicks search button to submit search query  
+  // called after user clicks search button to submit search query
   function search(e) {
     e.preventDefault();   // prevent page from refreshing
-
     setSearchQuery(""); // clear search bar
+
+    var searchParam = encodeURIComponent(searchQuery);  // format search query data
+    setSearchParameter(searchParam);
   }
 
   return (
@@ -40,24 +42,33 @@ function SearchBar() {
         />
         <button className="searchBtn">Find Movie</button>
       </form>
+
+      {/* display list of searched movies
+        [condition] ? [result if true] : [result if false]*/}
+      {searchParameter ? <MovieList movieTitle={searchParameter} searchState={searchParameter} /> : <></>}
+
     </div>
     );
 }
 
 // list of movies from search results
-function MovieList({movieTitle}) {
+function MovieList({movieTitle, searchState}) {
   const [movies, setMovies] = useState(null);
 
     // search movies
     useEffect(()=> {
+      console.log("getting search data for " + movieTitle);
+
         fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a`)
           .then(response => response.json())
           .then(setMovies)
           .catch(console.error);
-    }, []);
+    }, [searchState]); // useEffect will run when search state changes
 
     // display search results
     if (movies && movies.Response === "True") {
+      console.log("displaying movies for " + movieTitle);
+
       // display a card for every movie in search results list
       return (
            <div className="movieList">
