@@ -86,8 +86,7 @@ function MovieList({movieTitle, searchState}) {
            <div className="movieList">
               {/* display a card for every movie in search results list */
                movies.Search.map(movie => {
-                  return <MovieCard name={ movie.Title}
-                                releaseDate={movie.Year} />
+                  return <MovieCard name={movie.Title} year={movie.Year}/>
               })}
 
               { /* page navigation */
@@ -106,12 +105,13 @@ function MovieList({movieTitle, searchState}) {
 }
 
 // card showing details of a specific movie
-function MovieCard({name, releaseDate}) {
+function MovieCard({name, year}) {
   const [movieData, setMovieData] = useState(null);
 
-  var runtime = "Unknown duration";
-  var genre = "Unknown genre";
-  var director = "Unknown director";
+  var releaseDate = ""
+  var runtime = "";
+  var genre = "";
+  var director = "";
 
   const [detailsShown, setDetailsShown] = useState(false);  // whether or not details are currently displayed
 
@@ -130,10 +130,14 @@ function MovieCard({name, releaseDate}) {
 
   // set movie data variables to results retrieved
   if (movieData && movieData.Response === "True") {
+    releaseDate = `${movieData.Released}`;
     runtime = `${movieData.Runtime}`;
     genre = `${movieData.Genre}`;
     if (movieData.Director !== null && movieData.Director !== "N/A")
       director = `${movieData.Director}`;
+    else {
+      director = "Unknown director";
+    }
   }
 
   return (
@@ -151,7 +155,7 @@ function MovieCard({name, releaseDate}) {
             spacing = {2} >
 
           {/*movie title*/}
-            <Grid item style={{paddingTop: "25px", marginBottom: "20px"}} className="movieTitle">{name}</Grid>
+            <Grid item style={{paddingTop: "25px", marginBottom: "20px"}} className="movieTitle">{name} {year}</Grid>
 
           {/* horizontal row of movie details */}
             <Grid container
