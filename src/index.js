@@ -39,7 +39,7 @@ function MovieSearch() {
           value = {searchQuery} // store search query
           onChange = {e => setSearchQuery(e.target.value)}  // set search bar value to display search query
         />
-        <button className="searchBtn">Find Movie</button>
+        <button className="searchBtn colorFadeEffect">Find Movie</button>
       </form>
 
       {/* display list of searched movies
@@ -95,7 +95,7 @@ function MovieList({movieTitle, searchState}) {
 
           { /* display page navigation menu */
             [1,2,3].map((page) => (
-                <button onClick={() => {changePage(page)} }>{page}</button>
+                <button className="pageBtn colorFadeEffect" onClick={() => {changePage(page)} }>{page}</button>
               ))
           }
 
