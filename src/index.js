@@ -108,19 +108,15 @@ function MovieList({movieTitle, searchState}) {
 function MovieCard({name, year}) {
   const [movieData, setMovieData] = useState(null);
 
-  var releaseDate = "";
-  var runtime = "";
-  var genre = "";
-  var director = "";
+  var releaseDate = "Unknown release date";
+  var runtime = "Unknown runtime";
+  var genre = "Unknown genre";
+  var director = "Unknown director";
 
   const [detailsShown, setDetailsShown] = useState(false);  // whether or not details are currently displayed
 
   // clear data of movie on same card from previos page / search
   useEffect(() => {
-     // releaseDate = "";
-     // runtime = "";
-     // genre = "";
-     // director = "";
     setDetailsShown(false);
   }, [name, year]);
 
@@ -144,9 +140,6 @@ function MovieCard({name, year}) {
     genre = `${movieData.Genre}`;
     if (movieData.Director !== null && movieData.Director !== "N/A")
       director = `${movieData.Director}`;
-    else {
-      director = "Unknown director";
-    }
   }
 
   return (
@@ -166,7 +159,8 @@ function MovieCard({name, year}) {
           {/*movie title*/}
             <Grid item style={{paddingTop: "25px", marginBottom: "20px"}} className="movieTitle">{name} {year}</Grid>
 
-          {/* horizontal row of movie details */}
+          {/* horizontal row of movie details */
+            detailsShown ?
             <Grid container
               className = "cardDetailsContainer"
               direction='row'
@@ -177,6 +171,8 @@ function MovieCard({name, year}) {
               <Grid item>{genre}</Grid>
               <Grid item>{director}</Grid>
             </Grid>
+            : <></>
+          }
 
           </Grid>
         </CardActionArea>
