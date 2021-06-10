@@ -66,7 +66,7 @@ function MovieList({movieTitle, searchState}) {
     useEffect(()=> {
       console.log("getting search data for " + movieTitle + " page " + currentPage);
 
-        fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a&page=${currentPage}`)
+        fetch(`https://www.omdbapi.com/?s=${movieTitle}&apikey=52514a3a&page=${currentPage}`)
           .then(response => response.json())
           .then(response => setMovies(response))
           .catch(console.error);
@@ -124,7 +124,7 @@ function MovieCard({name, year}) {
     // will only get data if data isn't already displayed
     if (!detailsShown) {
       console.log("getting movie data");
-      fetch(`http://www.omdbapi.com/?t=${name}&y=${year}&apikey=52514a3a`)
+      fetch(`https://www.omdbapi.com/?t=${name}&y=${year}&apikey=52514a3a`)
         .then(response => response.json())
         .then(setMovieData)
         .catch(console.error);
