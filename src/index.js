@@ -108,19 +108,28 @@ function MovieList({movieTitle, searchState}) {
 function MovieCard({name, year}) {
   const [movieData, setMovieData] = useState(null);
 
-  var releaseDate = ""
+  var releaseDate = "";
   var runtime = "";
   var genre = "";
   var director = "";
 
   const [detailsShown, setDetailsShown] = useState(false);  // whether or not details are currently displayed
 
+  // clear data of movie on same card from previos page / search
+  useEffect(() => {
+     // releaseDate = "";
+     // runtime = "";
+     // genre = "";
+     // director = "";
+    setDetailsShown(false);
+  }, [name, year]);
+
   // find details of movie
   async function getDetails() {
     // will only get data if data isn't already displayed
     if (!detailsShown) {
       console.log("getting movie data");
-      fetch(`http://www.omdbapi.com/?t=${name}&apikey=52514a3a`)
+      fetch(`http://www.omdbapi.com/?t=${name}&y=${year}&apikey=52514a3a`)
         .then(response => response.json())
         .then(setMovieData)
         .catch(console.error);
