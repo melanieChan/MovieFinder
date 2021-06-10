@@ -78,30 +78,29 @@ function MovieList({movieTitle, searchState}) {
         setCurrentPage(page);
     }
 
-    // display search results
-    if (movies && movies.Response === "True") {
-      console.log("displaying movies for " + movieTitle + " page " + currentPage);
-
       return (
            <div className="movieList">
-              {/* display a card for every movie in search results list */
+           {   // display search results
+             movies && movies.Response === "True" ?
+
+              /* display a card for every movie in search results list */
                movies.Search.map(movie => {
                   return <MovieCard name={movie.Title} year={movie.Year}/>
-              })}
+              })
+              :   // if no results found
+              <div className="movieList">
+                  <h2>No results</h2>
+              </div>
+          }
 
-              { /* page navigation */
-                [1,2,3].map((page) => (
-                    <button onClick={() => {changePage(page)} }>{page}</button>
-                  ))}
+          { /* display page navigation menu */
+            [1,2,3].map((page) => (
+                <button onClick={() => {changePage(page)} }>{page}</button>
+              ))
+          }
+
            </div>
          );
-    }
-
-  return (
-    <div className="movieList">
-      <h2>No results</h2>
-    </div>
-  );
 }
 
 // card showing details of a specific movie
