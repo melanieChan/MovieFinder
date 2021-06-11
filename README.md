@@ -14,7 +14,9 @@ This was my first React project, and I learned how to start a project using Crea
 ### Resources Used
 
 - [Create React App](https://github.com/facebook/create-react-app)
-- [OMDB API](https://www.omdbapi.com/)
+- [Material-UI](https://material-ui.com/)
+- [OMDb API](https://www.omdbapi.com/)
 - [w3schools](https://www.w3schools.com/)
 - [LinkedIn Learning React Course](https://www.linkedin.com/learning/learning-react-js-5)
 - [Netlify](https://www.netlify.com/)
+
