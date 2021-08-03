@@ -1,5 +1,10 @@
 # Movie Finder
 
+A web application to search up movies.
+
+<a href="https://movie-finder-react-app.netlify.app/" target="_blank">Deployed demo</a>
+
+
 ### User Stories
 
 - Can search up a movie title, and see a list of search results
